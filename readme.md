@@ -25,13 +25,16 @@ Docs: https://www.prisma.io/docs/prisma-server/
 
 ## Before start
 
+1. Run following commands: 
 ````
 yarn install
 docker-compose up -d 
 prisma deploy
 ````
 
-Go to `./prisma/fixtures` and run all fixtures in prisma server's graphql playground (http://localhost:4466) 
+2. Go to `./prisma/fixtures` and run all fixtures in prisma server's graphql playground (http://localhost:4466) 
+
+3. Go to `./src/configs` and copy local.default.ts file as local.ts. Adjust local environment configurations.
 
 ## Run server in dev mode
 
