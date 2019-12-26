@@ -1,0 +1,41 @@
+mutation createDefaultRole {
+  createRole(
+    data: {
+      name: "default",
+      type: USER,
+      description: "Default role"
+    }
+  ) {
+    id
+    name
+    type
+    privileges {
+      name
+      type
+    }
+  }
+}
+
+mutation createAdminRole {
+  createRole(
+    data: {
+      name: "admin",
+      type: ADMIN,
+      description: "Admin role",
+      privileges: {
+        create: {
+            name: "Query_users",
+            type: GRAPHQL
+        }
+      }
+    }
+  ) {
+    id
+    name
+    type
+    privileges {
+      name
+      type
+    }
+  }
+}

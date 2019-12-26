@@ -1,4 +1,4 @@
-import { shield, rule, or} from 'graphql-shield';
+import {shield, rule, or} from 'graphql-shield';
 import {merge} from '../utils/object';
 
 const PRIVILEGE_GRAPHQL_TYPE = 'GRAPHQL';
