@@ -2,6 +2,7 @@ type User {
     id: ID! @id
     email: String! @unique
     name: String!
+    password: String!
     role: Role! @relation(link: TABLE, onDelete: SET_NULL)
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt

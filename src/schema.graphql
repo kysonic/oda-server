@@ -4,3 +4,8 @@ type Query {
     users(where: UserWhereInput, first: Int, skip: Int, orderBy: UserOrderByInput): [User!]!
     user(where: UserWhereUniqueInput): User!
 }
+
+type Mutation {
+    signup(email: String, password: String, data: UserDataInput): AuthPayload!
+    login(email: String, password: String): AuthPayload!
+}
