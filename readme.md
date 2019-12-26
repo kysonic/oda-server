@@ -23,9 +23,18 @@ To work with a few servers simultaneously, please adjust following `docker-compo
 
 Docs: https://www.prisma.io/docs/prisma-server/
 
-## DEV
+## Before start
 
 ````
 yarn install
+docker-compose up -d 
+prisma deploy
+````
+
+Go to `./prisma/fixtures` and run all fixtures in prisma server's graphql playground (http://localhost:4466) 
+
+## Run server in dev mode
+
+````
 yarn dev
 ````
