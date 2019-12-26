@@ -1,8 +1,5 @@
 endpoint: http://localhost:4466
 datamodel:
-  - ./models/core/module.prisma
-  - ./models/core/page.prisma
-  - ./models/core/navigation.prisma
   - ./models/core/user.prisma
 generate:
   - generator: typescript-client

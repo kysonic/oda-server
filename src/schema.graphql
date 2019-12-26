@@ -1,12 +1,6 @@
 #import User from './schema/core/user.graphql';
-#import Page from './schema/core/page.graphql';
-#import Navigation from './schema/core/navigation.graphql';
 
 type Query {
     users(where: UserWhereInput, first: Int, skip: Int, orderBy: UserOrderByInput): [User!]!
     user(where: UserWhereUniqueInput): User!
-    pages(where: PageWhereInput, first: Int, skip: Int, orderBy: PageOrderByInput): [Page!]!
-    page(where: PageWhereUniqInput): Page!
-    navigations(where: NavigationWhereInput, first: Int, skip: Int, orderBy: NavigationOrderByInput): [Navigation!]!
-    navigation(where: NavigationWhereUniqueInput): Navigation!
 }
