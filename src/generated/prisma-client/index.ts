@@ -179,7 +179,7 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type PrivilegeTypes = "CAN_READ_PAGES";
+export type PrivilegeTypes = "GRAPHQL" | "CUSTOM";
 
 export type PrivilegeOrderByInput =
   | "id_ASC"
@@ -424,7 +424,7 @@ export interface UserWhereInput {
 export interface PrivilegeCreateInput {
   id?: Maybe<ID_Input>;
   name: String;
-  type: PrivilegeTypes;
+  type?: Maybe<PrivilegeTypes>;
   payload?: Maybe<Json>;
   description?: Maybe<String>;
 }

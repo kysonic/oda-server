@@ -79,7 +79,7 @@ type PrivilegeConnection {
 input PrivilegeCreateInput {
   id: ID
   name: String!
-  type: PrivilegeTypes!
+  type: PrivilegeTypes
   payload: Json
   description: String
 }
@@ -186,7 +186,8 @@ input PrivilegeSubscriptionWhereInput {
 }
 
 enum PrivilegeTypes {
-  CAN_READ_PAGES
+  GRAPHQL
+  CUSTOM
 }
 
 input PrivilegeUpdateDataInput {

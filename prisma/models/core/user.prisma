@@ -24,11 +24,12 @@ enum RolesType {
 type Privilege {
     id: ID! @id
     name: String!
-    type: PrivilegeTypes!
+    type: PrivilegeTypes! @default(value: CUSTOM)
     payload: Json,
     description: String
 }
 
 enum PrivilegeTypes {
-    CAN_READ_PAGES
+    GRAPHQL
+    CUSTOM
 }
