@@ -1,0 +1,29 @@
+type Module {
+    id: ID! @id
+    name: String! @unique
+    type: ModuleTypes
+    configs: [ModuleConfig] @relation(link: TABLE, onDelete: SET_NULL)
+    createdAt: DateTime! @createdAt
+    updatedAt: DateTime! @updatedAt
+}
+
+type ModuleConfig {
+    id: ID! @id
+    name: String!
+    type: ModuleConfigTypes
+    json: Json
+}
+
+enum ModuleTypes {
+    REGULAR
+}
+
+enum ModuleConfigTypes {
+    INT
+    STRING
+    BOOLEAN
+    DATE
+    URL
+    ARRAY
+    JSON
+}

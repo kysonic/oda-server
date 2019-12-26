@@ -1,0 +1,67 @@
+type User {
+    id: ID!
+    email: String!
+    name: String!
+    role: Role!
+    createdAt: String!
+    updatedAt: String!
+}
+
+type Role {
+    id: ID!
+    name: String
+    type: RolesType
+    description: String
+    privileges: [Privilege!]!
+}
+
+enum RolesType {
+    ADMIN
+    USER
+}
+
+type Privilege {
+    id: ID!
+    name: String!
+    type: PrivilegeTypes!
+    payload: String,
+    description: String
+}
+
+enum PrivilegeTypes {
+    CAN_READ_PAGES
+}
+
+input UserWhereInput {
+    id: String
+    name: String
+    email: String
+    role: RoleInput
+    privilege: PrivilegeInput
+}
+
+input UserWhereUniqueInput {
+    id: String
+    email: String
+}
+
+enum UserOrderByInput {
+    name_ASC
+    name_DESC
+    email_ASC
+    email_DESC
+    createdAt_ASC
+    createdAt_DESC
+}
+
+input RoleInput {
+    id: ID
+    name: String
+    type: RolesType
+    privilege: PrivilegeInput
+}
+
+input PrivilegeInput {
+    name: String
+    type: PrivilegeTypes
+}

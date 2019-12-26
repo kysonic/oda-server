@@ -1,0 +1,14 @@
+type Page {
+    id: ID! @id
+    type: PageTypes @default(value: REGULAR)
+    title: String!
+    description: String
+    content: [Module] @relation(link: TABLE, onDelete: SET_NULL)
+    navigations: [Navigation] @relation(link: TABLE, onDelete: SET_NULL)
+    createdAt: DateTime! @createdAt
+    updatedAt: DateTime! @updatedAt
+}
+
+enum PageTypes {
+    REGULAR
+}

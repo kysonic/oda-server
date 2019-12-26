@@ -1,0 +1,33 @@
+type User {
+    id: ID! @id
+    email: String! @unique
+    name: String!
+    role: Role! @relation(link: TABLE, onDelete: SET_NULL)
+    createdAt: DateTime! @createdAt
+    updatedAt: DateTime! @updatedAt
+}
+
+type Role {
+    id: ID! @id
+    name: String @unique
+    type: RolesType @default(value: USER)
+    description: String
+    privileges: [Privilege!]! @relation(link: TABLE, onDelete: SET_NULL)
+}
+
+enum RolesType {
+    ADMIN
+    USER
+}
+
+type Privilege {
+    id: ID! @id
+    name: String!
+    type: PrivilegeTypes!
+    payload: Json,
+    description: String
+}
+
+enum PrivilegeTypes {
+    CAN_READ_PAGES
+}

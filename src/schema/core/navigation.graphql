@@ -1,0 +1,37 @@
+type Navigation {
+  id: ID!
+  name: String!
+  type: NavigationTypes
+  items: [NavigationItem]
+  createdAt: String
+  updatedAt: String
+}
+
+enum NavigationTypes {
+  TOP
+  BOTTOM
+}
+
+type NavigationItem {
+  id: ID!
+  title: String!
+  url: String
+  items: [NavigationItem]
+}
+
+input NavigationWhereInput {
+  id: ID
+  name: String
+  type: NavigationTypes
+}
+
+input NavigationWhereUniqueInput {
+  id: ID
+}
+
+enum NavigationOrderByInput {
+  name_ASC
+  name_DESC
+  createdAt_ASC
+  createdAt_DESC
+}

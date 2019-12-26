@@ -1,0 +1,29 @@
+type Module {
+    id: ID!
+    name: String!
+    type: ModuleTypes
+    configs: [ModuleConfig]
+    createdAt: String!
+    updatedAt: String!
+}
+
+type ModuleConfig {
+    id: ID!
+    name: String!
+    type: ModuleConfigTypes
+    json: String
+}
+
+enum ModuleTypes {
+    REGULAR
+}
+
+enum ModuleConfigTypes {
+    INT
+    STRING
+    BOOLEAN
+    DATE
+    URL
+    ARRAY
+    JSON
+}
