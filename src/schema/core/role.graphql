@@ -1,0 +1,21 @@
+#import Privilege from './privilege.graphql';
+
+type Role {
+    id: ID!
+    name: String
+    type: RolesType
+    description: String
+    privileges: [Privilege!]!
+}
+
+enum RolesType {
+    ADMIN
+    USER
+}
+
+input RoleInput {
+    id: ID
+    name: String
+    type: RolesType
+    privilege: PrivilegeInput
+}

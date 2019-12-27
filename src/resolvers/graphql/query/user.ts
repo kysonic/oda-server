@@ -5,6 +5,6 @@ export async function users(parent, {where, first, skip, orderBy}, {prisma}) {
     return prisma.users({where, first, skip, orderBy});
 }
 
-export async function user(parent, {where}, {prisma}) {
-    return prisma.user(where);
+export async function user(parent, {where}, context) {
+    return context.user;
 }

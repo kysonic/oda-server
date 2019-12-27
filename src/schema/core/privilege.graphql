@@ -1,0 +1,17 @@
+type Privilege {
+    id: ID!
+    name: String!
+    type: PrivilegeTypes!
+    payload: String,
+    description: String
+}
+
+enum PrivilegeTypes {
+    GRAPHQL
+    CUSTOM
+}
+
+input PrivilegeInput {
+    name: String
+    type: PrivilegeTypes
+}

@@ -2,7 +2,7 @@
 
 type Query {
     users(where: UserWhereInput, first: Int, skip: Int, orderBy: UserOrderByInput): [User!]!
-    user(where: UserWhereUniqueInput): User!
+    user(where: UserWhereUniqueInput): User
 }
 
 type Mutation {

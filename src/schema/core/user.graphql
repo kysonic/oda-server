@@ -1,3 +1,5 @@
+#import Role from './role.graphql';
+
 type User {
     id: ID!
     email: String!
@@ -6,31 +8,6 @@ type User {
     password: String!
     createdAt: String!
     updatedAt: String!
-}
-
-type Role {
-    id: ID!
-    name: String
-    type: RolesType
-    description: String
-    privileges: [Privilege!]!
-}
-
-enum RolesType {
-    ADMIN
-    USER
-}
-
-type Privilege {
-    id: ID!
-    name: String!
-    type: PrivilegeTypes!
-    payload: String,
-    description: String
-}
-
-enum PrivilegeTypes {
-    CAN_READ_PAGES
 }
 
 input UserWhereInput {
@@ -53,18 +30,6 @@ enum UserOrderByInput {
     email_DESC
     createdAt_ASC
     createdAt_DESC
-}
-
-input RoleInput {
-    id: ID
-    name: String
-    type: RolesType
-    privilege: PrivilegeInput
-}
-
-input PrivilegeInput {
-    name: String
-    type: PrivilegeTypes
 }
 
 input UserDataInput {
