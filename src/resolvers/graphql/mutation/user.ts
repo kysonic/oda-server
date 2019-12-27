@@ -1,6 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 
+import {validateEmail, sendTestMail} from '../../../services/mailgun';
 import configs from '../../../configs';
 import {Role, User} from '../../../generated/prisma-client';
 
@@ -21,6 +22,8 @@ export async function signup(parent, {email, password, data}, {prisma}) {
     });
 
     const token: string = jwt.sign({ userId: user.id }, configs.app?.auth?.secret);
+
+    await validateEmail(email);
 
     return {
         token,
@@ -50,10 +53,11 @@ export async function login(parent, {email, password}, {prisma}) {
 }
 
 export async function updateMyUser(parent, {data}, {prisma, user}) {
+    await sendTestMail();
     return prisma.updateUser({
         where: {
             id: user.id,
         },
-        data
+        data,
     });
 }

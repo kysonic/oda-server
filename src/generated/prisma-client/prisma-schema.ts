@@ -491,6 +491,7 @@ type User {
   email: String!
   name: String!
   password: String!
+  emailApproved: Boolean!
   role: Role!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -507,6 +508,7 @@ input UserCreateInput {
   email: String!
   name: String!
   password: String!
+  emailApproved: Boolean
   role: RoleCreateOneInput!
 }
 
@@ -524,6 +526,8 @@ enum UserOrderByInput {
   name_DESC
   password_ASC
   password_DESC
+  emailApproved_ASC
+  emailApproved_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -535,6 +539,7 @@ type UserPreviousValues {
   email: String!
   name: String!
   password: String!
+  emailApproved: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -561,6 +566,7 @@ input UserUpdateInput {
   email: String
   name: String
   password: String
+  emailApproved: Boolean
   role: RoleUpdateOneRequiredInput
 }
 
@@ -568,6 +574,7 @@ input UserUpdateManyMutationInput {
   email: String
   name: String
   password: String
+  emailApproved: Boolean
 }
 
 input UserWhereInput {
@@ -627,6 +634,8 @@ input UserWhereInput {
   password_not_starts_with: String
   password_ends_with: String
   password_not_ends_with: String
+  emailApproved: Boolean
+  emailApproved_not: Boolean
   role: RoleWhereInput
   createdAt: DateTime
   createdAt_not: DateTime

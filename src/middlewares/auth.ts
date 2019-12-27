@@ -7,12 +7,13 @@ export async function getUser(resolve, root, args, context, info) {
     if (Authorization) {
         const token: string = Authorization.replace('Bearer ', '');
         const { userId } = jwt.verify(token, configs.app?.auth?.secret);
-        
+
         const fragment = `
             fragment UserWithRole on User {
               id
               name
               email
+              emailApproved
               createdAt
               updatedAt
               role {

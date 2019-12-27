@@ -214,6 +214,8 @@ export type UserOrderByInput =
   | "name_DESC"
   | "password_ASC"
   | "password_DESC"
+  | "emailApproved_ASC"
+  | "emailApproved_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -399,6 +401,8 @@ export interface UserWhereInput {
   password_not_starts_with?: Maybe<String>;
   password_ends_with?: Maybe<String>;
   password_not_ends_with?: Maybe<String>;
+  emailApproved?: Maybe<Boolean>;
+  emailApproved_not?: Maybe<Boolean>;
   role?: Maybe<RoleWhereInput>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
@@ -577,6 +581,7 @@ export interface UserCreateInput {
   email: String;
   name: String;
   password: String;
+  emailApproved?: Maybe<Boolean>;
   role: RoleCreateOneInput;
 }
 
@@ -589,6 +594,7 @@ export interface UserUpdateInput {
   email?: Maybe<String>;
   name?: Maybe<String>;
   password?: Maybe<String>;
+  emailApproved?: Maybe<Boolean>;
   role?: Maybe<RoleUpdateOneRequiredInput>;
 }
 
@@ -615,6 +621,7 @@ export interface UserUpdateManyMutationInput {
   email?: Maybe<String>;
   name?: Maybe<String>;
   password?: Maybe<String>;
+  emailApproved?: Maybe<Boolean>;
 }
 
 export interface PrivilegeSubscriptionWhereInput {
@@ -893,6 +900,7 @@ export interface User {
   email: String;
   name: String;
   password: String;
+  emailApproved: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -902,6 +910,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   email: () => Promise<String>;
   name: () => Promise<String>;
   password: () => Promise<String>;
+  emailApproved: () => Promise<Boolean>;
   role: <T = RolePromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
@@ -914,6 +923,7 @@ export interface UserSubscription
   email: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  emailApproved: () => Promise<AsyncIterator<Boolean>>;
   role: <T = RoleSubscription>() => T;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -926,6 +936,7 @@ export interface UserNullablePromise
   email: () => Promise<String>;
   name: () => Promise<String>;
   password: () => Promise<String>;
+  emailApproved: () => Promise<Boolean>;
   role: <T = RolePromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
@@ -1134,6 +1145,7 @@ export interface UserPreviousValues {
   email: String;
   name: String;
   password: String;
+  emailApproved: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -1145,6 +1157,7 @@ export interface UserPreviousValuesPromise
   email: () => Promise<String>;
   name: () => Promise<String>;
   password: () => Promise<String>;
+  emailApproved: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -1156,6 +1169,7 @@ export interface UserPreviousValuesSubscription
   email: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  emailApproved: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
