@@ -2,6 +2,7 @@ import {GraphQLServer} from 'graphql-yoga';
 import {prisma} from './generated/prisma-client';
 import resolvers from './resolvers';
 import {getUser} from './middlewares/auth';
+import {validation} from './middlewares/validation';
 import {getShield} from './services/auth';
 
 (async () => {
@@ -18,7 +19,8 @@ import {getShield} from './services/auth';
         ),
         middlewares: [
             getUser,
-            shield
+            shield,
+            validation
         ]
     });
 

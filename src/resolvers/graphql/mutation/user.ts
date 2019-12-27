@@ -48,3 +48,7 @@ export async function login(parent, {email, password}, {prisma}) {
         user,
     }
 }
+
+export async function updateMyUser(parent, {data}, {prisma, user}) {
+
+}

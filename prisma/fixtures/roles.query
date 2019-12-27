@@ -3,7 +3,14 @@ mutation createDefaultRole {
     data: {
       name: "default",
       type: USER,
-      description: "Default role"
+      description: "Default role",
+      privileges: {
+          create: {
+              name: "Mutation_updateMyUser",
+              description: "Allows updating own user",
+              type: GRAPHQL
+          }
+      }
     }
   ) {
     id
@@ -25,6 +32,7 @@ mutation createAdminRole {
       privileges: {
         create: {
             name: "Query_users",
+            description: "Allows fetching all users",
             type: GRAPHQL
         }
       }
