@@ -5,19 +5,24 @@ const userEmailPasswordRules = {
     password: yup.string().min(3).required(),
 };
 
-export default {
-    query: {
+const userDataRules = {
+    data: yup.object().shape({
+        name: yup.string().max(25)
+    })
+};
 
-    },
+export default {
+    query: {},
     mutation: {
         signup: yup.object().shape({
             ...userEmailPasswordRules,
-            data: yup.object().shape({
-                name: yup.string().max(25)
-            })
+            ...userDataRules,
         }),
         login: yup.object().shape({
             ...userEmailPasswordRules
+        }),
+        updateMyUser: yup.object().shape({
+            ...userDataRules
         }),
     }
 }

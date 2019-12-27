@@ -1,4 +1,4 @@
-import {objectHasProperties} from './object';
+import {objectHasProperties} from '../utils/object';
 
 export function parallel(where, props = [], clause = 'contains'): void {
     const clauses = props.map( prop => {

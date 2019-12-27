@@ -50,5 +50,10 @@ export async function login(parent, {email, password}, {prisma}) {
 }
 
 export async function updateMyUser(parent, {data}, {prisma, user}) {
-
+    return prisma.updateUser({
+        where: {
+            id: user.id,
+        },
+        data
+    });
 }
