@@ -1,14 +1,11 @@
-import * as yup from 'yup';
+import userValidation from './user';
 
 const Schemas = {
+    query: {
+        ...userValidation.query
+    },
     mutation: {
-        signup: yup.object().shape({
-            email: yup.string().email().required(),
-            password: yup.string().min(3).required(),
-            data: yup.object().shape({
-                name: yup.string().max(25)
-            })
-        })
+        ...userValidation.mutation
     }
 };
 
