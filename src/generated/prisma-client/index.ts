@@ -18,7 +18,6 @@ export type Maybe<T> = T | undefined | null;
 export interface Exists {
   privilege: (where?: PrivilegeWhereInput) => Promise<boolean>;
   role: (where?: RoleWhereInput) => Promise<boolean>;
-  token: (where?: TokenWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -79,25 +78,6 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => RoleConnectionPromise;
-  token: (where: TokenWhereUniqueInput) => TokenNullablePromise;
-  tokens: (args?: {
-    where?: TokenWhereInput;
-    orderBy?: TokenOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => FragmentableArray<Token>;
-  tokensConnection: (args?: {
-    where?: TokenWhereInput;
-    orderBy?: TokenOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => TokenConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -155,22 +135,6 @@ export interface Prisma {
   }) => RolePromise;
   deleteRole: (where: RoleWhereUniqueInput) => RolePromise;
   deleteManyRoles: (where?: RoleWhereInput) => BatchPayloadPromise;
-  createToken: (data: TokenCreateInput) => TokenPromise;
-  updateToken: (args: {
-    data: TokenUpdateInput;
-    where: TokenWhereUniqueInput;
-  }) => TokenPromise;
-  updateManyTokens: (args: {
-    data: TokenUpdateManyMutationInput;
-    where?: TokenWhereInput;
-  }) => BatchPayloadPromise;
-  upsertToken: (args: {
-    where: TokenWhereUniqueInput;
-    create: TokenCreateInput;
-    update: TokenUpdateInput;
-  }) => TokenPromise;
-  deleteToken: (where: TokenWhereUniqueInput) => TokenPromise;
-  deleteManyTokens: (where?: TokenWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -202,9 +166,6 @@ export interface Subscription {
   role: (
     where?: RoleSubscriptionWhereInput
   ) => RoleSubscriptionPayloadSubscription;
-  token: (
-    where?: TokenSubscriptionWhereInput
-  ) => TokenSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -243,20 +204,6 @@ export type RoleOrderByInput =
   | "type_DESC"
   | "description_ASC"
   | "description_DESC";
-
-export type TokenType = "EMAIL" | "REFRESH" | "CUSTOM";
-
-export type TokenOrderByInput =
-  | "id_ASC"
-  | "id_DESC"
-  | "type_ASC"
-  | "type_DESC"
-  | "token_ASC"
-  | "token_DESC"
-  | "ttl_ASC"
-  | "ttl_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -390,64 +337,6 @@ export interface RoleWhereInput {
   AND?: Maybe<RoleWhereInput[] | RoleWhereInput>;
   OR?: Maybe<RoleWhereInput[] | RoleWhereInput>;
   NOT?: Maybe<RoleWhereInput[] | RoleWhereInput>;
-}
-
-export type TokenWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface TokenWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  type?: Maybe<TokenType>;
-  type_not?: Maybe<TokenType>;
-  type_in?: Maybe<TokenType[] | TokenType>;
-  type_not_in?: Maybe<TokenType[] | TokenType>;
-  token?: Maybe<String>;
-  token_not?: Maybe<String>;
-  token_in?: Maybe<String[] | String>;
-  token_not_in?: Maybe<String[] | String>;
-  token_lt?: Maybe<String>;
-  token_lte?: Maybe<String>;
-  token_gt?: Maybe<String>;
-  token_gte?: Maybe<String>;
-  token_contains?: Maybe<String>;
-  token_not_contains?: Maybe<String>;
-  token_starts_with?: Maybe<String>;
-  token_not_starts_with?: Maybe<String>;
-  token_ends_with?: Maybe<String>;
-  token_not_ends_with?: Maybe<String>;
-  ttl?: Maybe<Int>;
-  ttl_not?: Maybe<Int>;
-  ttl_in?: Maybe<Int[] | Int>;
-  ttl_not_in?: Maybe<Int[] | Int>;
-  ttl_lt?: Maybe<Int>;
-  ttl_lte?: Maybe<Int>;
-  ttl_gt?: Maybe<Int>;
-  ttl_gte?: Maybe<Int>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<TokenWhereInput[] | TokenWhereInput>;
-  OR?: Maybe<TokenWhereInput[] | TokenWhereInput>;
-  NOT?: Maybe<TokenWhereInput[] | TokenWhereInput>;
 }
 
 export type UserWhereUniqueInput = AtLeastOne<{
@@ -687,25 +576,6 @@ export interface RoleUpdateManyMutationInput {
   description?: Maybe<String>;
 }
 
-export interface TokenCreateInput {
-  id?: Maybe<ID_Input>;
-  type?: Maybe<TokenType>;
-  token: String;
-  ttl?: Maybe<Int>;
-}
-
-export interface TokenUpdateInput {
-  type?: Maybe<TokenType>;
-  token?: Maybe<String>;
-  ttl?: Maybe<Int>;
-}
-
-export interface TokenUpdateManyMutationInput {
-  type?: Maybe<TokenType>;
-  token?: Maybe<String>;
-  ttl?: Maybe<Int>;
-}
-
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
   email: String;
@@ -780,17 +650,6 @@ export interface RoleSubscriptionWhereInput {
   AND?: Maybe<RoleSubscriptionWhereInput[] | RoleSubscriptionWhereInput>;
   OR?: Maybe<RoleSubscriptionWhereInput[] | RoleSubscriptionWhereInput>;
   NOT?: Maybe<RoleSubscriptionWhereInput[] | RoleSubscriptionWhereInput>;
-}
-
-export interface TokenSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<TokenWhereInput>;
-  AND?: Maybe<TokenSubscriptionWhereInput[] | TokenSubscriptionWhereInput>;
-  OR?: Maybe<TokenSubscriptionWhereInput[] | TokenSubscriptionWhereInput>;
-  NOT?: Maybe<TokenSubscriptionWhereInput[] | TokenSubscriptionWhereInput>;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -1036,96 +895,6 @@ export interface AggregateRoleSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface Token {
-  id: ID_Output;
-  type?: TokenType;
-  token: String;
-  ttl?: Int;
-  createdAt: DateTimeOutput;
-}
-
-export interface TokenPromise extends Promise<Token>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  type: () => Promise<TokenType>;
-  token: () => Promise<String>;
-  ttl: () => Promise<Int>;
-  createdAt: () => Promise<DateTimeOutput>;
-}
-
-export interface TokenSubscription
-  extends Promise<AsyncIterator<Token>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  type: () => Promise<AsyncIterator<TokenType>>;
-  token: () => Promise<AsyncIterator<String>>;
-  ttl: () => Promise<AsyncIterator<Int>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface TokenNullablePromise
-  extends Promise<Token | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  type: () => Promise<TokenType>;
-  token: () => Promise<String>;
-  ttl: () => Promise<Int>;
-  createdAt: () => Promise<DateTimeOutput>;
-}
-
-export interface TokenConnection {
-  pageInfo: PageInfo;
-  edges: TokenEdge[];
-}
-
-export interface TokenConnectionPromise
-  extends Promise<TokenConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<TokenEdge>>() => T;
-  aggregate: <T = AggregateTokenPromise>() => T;
-}
-
-export interface TokenConnectionSubscription
-  extends Promise<AsyncIterator<TokenConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TokenEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTokenSubscription>() => T;
-}
-
-export interface TokenEdge {
-  node: Token;
-  cursor: String;
-}
-
-export interface TokenEdgePromise extends Promise<TokenEdge>, Fragmentable {
-  node: <T = TokenPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface TokenEdgeSubscription
-  extends Promise<AsyncIterator<TokenEdge>>,
-    Fragmentable {
-  node: <T = TokenSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateToken {
-  count: Int;
-}
-
-export interface AggregateTokenPromise
-  extends Promise<AggregateToken>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateTokenSubscription
-  extends Promise<AsyncIterator<AggregateToken>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
 export interface User {
   id: ID_Output;
   email: String;
@@ -1346,59 +1115,6 @@ export interface RolePreviousValuesSubscription
   description: () => Promise<AsyncIterator<String>>;
 }
 
-export interface TokenSubscriptionPayload {
-  mutation: MutationType;
-  node: Token;
-  updatedFields: String[];
-  previousValues: TokenPreviousValues;
-}
-
-export interface TokenSubscriptionPayloadPromise
-  extends Promise<TokenSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = TokenPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = TokenPreviousValuesPromise>() => T;
-}
-
-export interface TokenSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<TokenSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = TokenSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = TokenPreviousValuesSubscription>() => T;
-}
-
-export interface TokenPreviousValues {
-  id: ID_Output;
-  type?: TokenType;
-  token: String;
-  ttl?: Int;
-  createdAt: DateTimeOutput;
-}
-
-export interface TokenPreviousValuesPromise
-  extends Promise<TokenPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  type: () => Promise<TokenType>;
-  token: () => Promise<String>;
-  ttl: () => Promise<Int>;
-  createdAt: () => Promise<DateTimeOutput>;
-}
-
-export interface TokenPreviousValuesSubscription
-  extends Promise<AsyncIterator<TokenPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  type: () => Promise<AsyncIterator<TokenType>>;
-  token: () => Promise<AsyncIterator<String>>;
-  ttl: () => Promise<AsyncIterator<Int>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
 export interface UserSubscriptionPayload {
   mutation: MutationType;
   node: User;
@@ -1516,14 +1232,6 @@ export const models: Model[] = [
   },
   {
     name: "PrivilegeTypes",
-    embedded: false
-  },
-  {
-    name: "Token",
-    embedded: false
-  },
-  {
-    name: "TokenType",
     embedded: false
   }
 ];

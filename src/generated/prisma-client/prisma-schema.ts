@@ -10,10 +10,6 @@ type AggregateRole {
   count: Int!
 }
 
-type AggregateToken {
-  count: Int!
-}
-
 type AggregateUser {
   count: Int!
 }
@@ -41,12 +37,6 @@ type Mutation {
   upsertRole(where: RoleWhereUniqueInput!, create: RoleCreateInput!, update: RoleUpdateInput!): Role!
   deleteRole(where: RoleWhereUniqueInput!): Role
   deleteManyRoles(where: RoleWhereInput): BatchPayload!
-  createToken(data: TokenCreateInput!): Token!
-  updateToken(data: TokenUpdateInput!, where: TokenWhereUniqueInput!): Token
-  updateManyTokens(data: TokenUpdateManyMutationInput!, where: TokenWhereInput): BatchPayload!
-  upsertToken(where: TokenWhereUniqueInput!, create: TokenCreateInput!, update: TokenUpdateInput!): Token!
-  deleteToken(where: TokenWhereUniqueInput!): Token
-  deleteManyTokens(where: TokenWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -319,9 +309,6 @@ type Query {
   role(where: RoleWhereUniqueInput!): Role
   roles(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Role]!
   rolesConnection(where: RoleWhereInput, orderBy: RoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RoleConnection!
-  token(where: TokenWhereUniqueInput!): Token
-  tokens(where: TokenWhereInput, orderBy: TokenOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Token]!
-  tokensConnection(where: TokenWhereInput, orderBy: TokenOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TokenConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -496,149 +483,7 @@ input RoleWhereUniqueInput {
 type Subscription {
   privilege(where: PrivilegeSubscriptionWhereInput): PrivilegeSubscriptionPayload
   role(where: RoleSubscriptionWhereInput): RoleSubscriptionPayload
-  token(where: TokenSubscriptionWhereInput): TokenSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-}
-
-type Token {
-  id: ID!
-  type: TokenType
-  token: String!
-  ttl: Int
-  createdAt: DateTime!
-}
-
-type TokenConnection {
-  pageInfo: PageInfo!
-  edges: [TokenEdge]!
-  aggregate: AggregateToken!
-}
-
-input TokenCreateInput {
-  id: ID
-  type: TokenType
-  token: String!
-  ttl: Int
-}
-
-type TokenEdge {
-  node: Token!
-  cursor: String!
-}
-
-enum TokenOrderByInput {
-  id_ASC
-  id_DESC
-  type_ASC
-  type_DESC
-  token_ASC
-  token_DESC
-  ttl_ASC
-  ttl_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type TokenPreviousValues {
-  id: ID!
-  type: TokenType
-  token: String!
-  ttl: Int
-  createdAt: DateTime!
-}
-
-type TokenSubscriptionPayload {
-  mutation: MutationType!
-  node: Token
-  updatedFields: [String!]
-  previousValues: TokenPreviousValues
-}
-
-input TokenSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: TokenWhereInput
-  AND: [TokenSubscriptionWhereInput!]
-  OR: [TokenSubscriptionWhereInput!]
-  NOT: [TokenSubscriptionWhereInput!]
-}
-
-enum TokenType {
-  EMAIL
-  REFRESH
-  CUSTOM
-}
-
-input TokenUpdateInput {
-  type: TokenType
-  token: String
-  ttl: Int
-}
-
-input TokenUpdateManyMutationInput {
-  type: TokenType
-  token: String
-  ttl: Int
-}
-
-input TokenWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  type: TokenType
-  type_not: TokenType
-  type_in: [TokenType!]
-  type_not_in: [TokenType!]
-  token: String
-  token_not: String
-  token_in: [String!]
-  token_not_in: [String!]
-  token_lt: String
-  token_lte: String
-  token_gt: String
-  token_gte: String
-  token_contains: String
-  token_not_contains: String
-  token_starts_with: String
-  token_not_starts_with: String
-  token_ends_with: String
-  token_not_ends_with: String
-  ttl: Int
-  ttl_not: Int
-  ttl_in: [Int!]
-  ttl_not_in: [Int!]
-  ttl_lt: Int
-  ttl_lte: Int
-  ttl_gt: Int
-  ttl_gte: Int
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  AND: [TokenWhereInput!]
-  OR: [TokenWhereInput!]
-  NOT: [TokenWhereInput!]
-}
-
-input TokenWhereUniqueInput {
-  id: ID
 }
 
 type User {
