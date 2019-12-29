@@ -6,7 +6,6 @@ export const mailgun = Mailgun({
     domain: configs.mailgun?.domain
 });
 
-
 export async function sendTestMail() {
     const data = {
         from: 'Excited User <me@samples.mailgun.org>',
