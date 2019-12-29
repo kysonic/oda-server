@@ -5,11 +5,18 @@ mutation createDefaultRole {
       type: USER,
       description: "Default role",
       privileges: {
-          create: {
-              name: "Mutation_updateMyUser",
-              description: "Allows updating own user",
-              type: GRAPHQL
-          }
+          create: [
+              {
+                  name: "Mutation_updateMyUser",
+                  description: "Allows updating own user",
+                  type: GRAPHQL
+              },
+              {
+                  name: "Mutation_approveUserEmail",
+                  description: "Approve user email by token",
+                  type: GRAPHQL
+              }
+          ]
       }
     }
   ) {
