@@ -1,4 +1,5 @@
 import {GraphQLServer} from 'graphql-yoga';
+import * as express from 'express';
 import {prisma} from './generated/prisma-client';
 import resolvers from './resolvers';
 import {getUser} from './middlewares/auth';
@@ -26,9 +27,12 @@ import {renderEmailTemplate} from './email';
     });
 
     server.start(() => console.log('Server is running on http://localhost:4000'));
+    // Serve static files
+    server.express.use(express.static('public'));
+    // Preview email
+    server.express.use('/render-email-template', async (req, res, next) => {
+        const html = await renderEmailTemplate(req.query?.tplName || 'approve-email', req.query, true);
 
-    server.express.use('/renderEmailTemplate', async (req, res, next) => {
-        const html = await renderEmailTemplate(req.query.tplName || 'approve-email', req.query);
         res.end(html);
     });
 })();

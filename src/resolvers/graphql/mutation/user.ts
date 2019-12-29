@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 
-import {validateEmail, sendTestMail} from '../../../services/mailgun';
+import {validateEmail} from '../../../services/mailgun';
 import configs from '../../../configs';
 import {Role, User} from '../../../generated/prisma-client';
 
@@ -22,8 +22,8 @@ export async function signup(parent, {email, password, data}, {prisma}) {
     });
 
     const token: string = jwt.sign({ userId: user.id }, configs.app?.auth?.secret);
-
-    await validateEmail(email);
+    const url = `${configs.email?.approveEmailUrl}?token=${token}`;
+    await validateEmail(email, url);
 
     return {
         token,
@@ -53,11 +53,22 @@ export async function login(parent, {email, password}, {prisma}) {
 }
 
 export async function updateMyUser(parent, {data}, {prisma, user}) {
-    await sendTestMail();
     return prisma.updateUser({
         where: {
             id: user.id,
         },
         data,
     });
+}
+
+
+export async function approveUserEmail(parent, {token}, {prisma, user}) {
+    const { userId } = jwt.verify(token, configs.app?.auth?.secret);
+    await prisma.updateUser({where: {id: userId}, data: {emailApproved: true}});
+    user.emailApproved = true;
+
+    return {
+        success: true,
+        message: 'User email has been approved successfully',
+    };
 }

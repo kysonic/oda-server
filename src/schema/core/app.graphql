@@ -1,0 +1,4 @@
+type ApplicationResponse {
+    success: Boolean!
+    message: String!
+}

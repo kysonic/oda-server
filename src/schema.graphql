@@ -1,4 +1,5 @@
 #import User from './schema/core/user.graphql';
+#import ApplicationResponse from './schema/core/app.graphql';
 
 type Query {
     users(where: UserWhereInput, first: Int, skip: Int, orderBy: UserOrderByInput): [User!]!
@@ -10,4 +11,5 @@ type Mutation {
     signup(email: String, password: String, data: UserDataInput): AuthPayload!
     login(email: String, password: String): AuthPayload!
     updateMyUser(data: UserDataInput): User!
+    approveUserEmail(token: String): ApplicationResponse!
 }
