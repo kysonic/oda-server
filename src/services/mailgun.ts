@@ -20,7 +20,7 @@ export async function sendMailgunEmail(email, subject, html, resources = []): Pr
         to: email,
         subject: subject,
         html: html,
-        inline: EMAIL_DEFAULT_RESOURCES.concat([])
+        inline: EMAIL_DEFAULT_RESOURCES.concat(resources)
     };
 
     const response = await mailgun.messages().send(data);

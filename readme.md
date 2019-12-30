@@ -11,7 +11,7 @@ All Prisma (Data Access Layer) configurations are contained in `docker-compose.y
 database as more powerful tool, but configuration could be changed per client's request. Before change database type
 be sure that some databases as MongoDB have restrictions, e.g. 
 
-- MongoDB connector doesn't support OR clause.  
+- MongoDB connector doesn't support OR clause. 
 - MySQL | Postgres connector doesn't support INLINE relation
 
 Name convention: 

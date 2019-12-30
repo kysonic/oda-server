@@ -87,7 +87,7 @@ export async function forgetUserEmail(parent, {email}, {prisma}) {
     return {
         success: true,
         message: 'Email has been sent successfully',
-        details: response.message
+        details: response.message,
     };
 }
 
