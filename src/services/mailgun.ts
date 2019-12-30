@@ -9,7 +9,12 @@ export const mailgun = Mailgun({
 
 const MAILGUN_SUCCESS_MESSAGE = 'Queued. Thank you.';
 
-export async function sendMailgunEmail(email, subject, html, resources = []) {
+type MailgunResponse = {
+    id: string,
+    message: string
+}
+
+export async function sendMailgunEmail(email, subject, html, resources = []): Promise<MailgunResponse> {
     const data = {
         from: configs.email?.from,
         to: email,
@@ -27,8 +32,14 @@ export async function sendMailgunEmail(email, subject, html, resources = []) {
     return response;
 }
 
-export async function validateEmail(email: string, url: string): Promise<void> {
+export async function validateEmail(email: string, url: string): Promise<MailgunResponse> {
     const html = await renderEmailTemplate('approve-email', {url});
 
     return sendMailgunEmail(email, 'Подтверждение email', html);
+}
+
+export async function forgetEmail(email: string, url: string): Promise<MailgunResponse> {
+    const html = await renderEmailTemplate('forget-email', {url});
+
+    return sendMailgunEmail(email, 'Забыли пароль?', html);
 }

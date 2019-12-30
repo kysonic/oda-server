@@ -1,7 +1,7 @@
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 
-import {validateEmail} from '../../../services/mailgun';
+import {validateEmail, forgetEmail} from '../../../services/mailgun';
 import configs from '../../../configs';
 import {Role, User} from '../../../generated/prisma-client';
 
@@ -66,6 +66,35 @@ export async function approveUserEmail(parent, {token}, {prisma, user}) {
     const { userId } = jwt.verify(token, configs.app?.auth?.secret);
     await prisma.updateUser({where: {id: userId}, data: {emailApproved: true}});
     user.emailApproved = true;
+
+    return {
+        success: true,
+        message: 'User email has been approved successfully',
+    };
+}
+
+export async function forgetUserEmail(parent, {email}, {prisma}) {
+    const user: User = await prisma.user({ email });
+
+    if (!user) {
+        throw new Error('No such user found');
+    }
+
+    const token: string = jwt.sign({ userId: user.id }, configs.app?.auth?.secret);
+    const url = `${configs.email?.approveEmailUrl}?token=${token}`;
+    const response = await forgetEmail(email, url);
+
+    return {
+        success: true,
+        message: 'Email has been sent successfully',
+        details: response.message
+    };
+}
+
+export async function changeUserPassword(parent, {token, password}, {prisma}) {
+    const { userId } = jwt.verify(token, configs.app?.auth?.secret);
+    const encryptedPassword: string = await bcrypt.hash(password, 10);
+    await prisma.updateUser({where: {id: userId}, data: {password: encryptedPassword}});
 
     return {
         success: true,

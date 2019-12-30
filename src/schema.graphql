@@ -12,4 +12,6 @@ type Mutation {
     login(email: String, password: String): AuthPayload!
     updateMyUser(data: UserDataInput): User!
     approveUserEmail(token: String): ApplicationResponse!
+    forgetUserEmail(email: String): ApplicationResponse!
+    changeUserPassword(token: String, password: String!): ApplicationResponse!
 }
