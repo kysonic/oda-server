@@ -1,0 +1,19 @@
+type Card {
+    id: ID!
+    title: String!
+    description: String
+    image: String
+}
+
+input CardWhereInput {
+    id: String
+    title: String
+    description: String
+}
+
+enum CardOrderByInput {
+    title_ASC
+    title_DESC
+    createdAt_ASC
+    createdAt_DESC
+}

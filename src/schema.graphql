@@ -1,10 +1,12 @@
 #import User from './schema/core/user.graphql';
+#import Card from './schema/core/card.graphql';
 #import ApplicationResponse from './schema/core/app.graphql';
 
 type Query {
     users(where: UserWhereInput, first: Int, skip: Int, orderBy: UserOrderByInput): [User!]!
     user(where: UserWhereUniqueInput): User
     myUser: User
+    cards(where: CardWhereInput, first: Int, skip: Int, orderBy: CardOrderByInput): [Card!]!
 }
 
 type Mutation {
