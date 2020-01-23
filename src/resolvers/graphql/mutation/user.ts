@@ -22,8 +22,13 @@ export async function signup(parent, {email, password, data}, {prisma}) {
     });
 
     const token: string = jwt.sign({ userId: user.id }, configs.app?.auth?.secret);
-    const url = `${configs.email?.approveEmailUrl}?token=${token}`;
-    await validateEmail(email, url);
+
+    try {
+        const url = `${configs.email?.approveEmailUrl}?token=${token}`;
+        await validateEmail(email, url);
+    } catch (err) {
+        console.log(err);
+    }
 
     return {
         token,
