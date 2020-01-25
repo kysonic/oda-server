@@ -7,8 +7,8 @@ export default {
     },
     email: {
         from: 'Oda Client Service <oda.client.service@oda.io>',
-        approveEmailUrl: 'https://vk.com',
-        forgetEmailUrl: 'https://vk.com',
+        approveEmailUrl: 'http://localhost:3000/approve-email',
+        forgetEmailUrl: 'http://localhost:3000/change-password',
         mailgun: {
             apiKey: 'ef8ba4f267505b5393317baa5a565eba-a9919d1f-92544afa',
             domain: 'sandbox13460fa786f84f15833e61523b23628c.mailgun.org'

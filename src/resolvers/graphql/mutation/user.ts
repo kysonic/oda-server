@@ -86,7 +86,7 @@ export async function forgetUserEmail(parent, {email}, {prisma}) {
     }
 
     const token: string = jwt.sign({ userId: user.id }, configs.app?.auth?.secret);
-    const url = `${configs.email?.approveEmailUrl}?token=${token}`;
+    const url = `${configs.email?.forgetEmailUrl}?token=${token}`;
     const response = await forgetEmail(email, url);
 
     return {
