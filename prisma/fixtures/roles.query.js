@@ -1,4 +1,5 @@
-mutation createDefaultRole {
+module.exports = [
+	`mutation createDefaultRole {
   createRole(
     data: {
       name: "default",
@@ -28,9 +29,8 @@ mutation createDefaultRole {
       type
     }
   }
-}
-
-mutation createAdminRole {
+}`,
+`mutation createAdminRole {
   createRole(
     data: {
       name: "admin",
@@ -53,4 +53,5 @@ mutation createAdminRole {
       type
     }
   }
-}
+}`
+];

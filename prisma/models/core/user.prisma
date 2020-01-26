@@ -4,7 +4,7 @@ type User {
     name: String!
     password: String!
     emailApproved: Boolean! @default(value: false)
-    role: Role! @relation(link: TABLE, onDelete: SET_NULL)
+    role: Role! @relation(link: TABLE, onDelete: SET_NULL, name: "User2Role")
     createdAt: DateTime! @createdAt
     updatedAt: DateTime! @updatedAt
 }
@@ -14,7 +14,7 @@ type Role {
     name: String @unique
     type: RolesType @default(value: USER)
     description: String
-    privileges: [Privilege!]! @relation(link: TABLE, onDelete: SET_NULL)
+    privileges: [Privilege!]! @relation(link: TABLE, onDelete: SET_NULL, name: "Role2Privilege")
 }
 
 enum RolesType {
