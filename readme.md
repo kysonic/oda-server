@@ -32,7 +32,8 @@ docker-compose up -d
 prisma deploy
 ````
 
-2. Go to `./prisma/fixtures` and run all fixtures in prisma server's graphql playground (http://localhost:4466) 
+2. Run `npx ts-node bin/init.ts` to set up prisma fixtures <br />
+  **OR** Go to `./prisma/fixtures` and run all fixtures in prisma server's graphql playground (http://localhost:4466) 
 
 3. Go to `./src/configs` and copy local.default.ts file as local.ts. Adjust local environment configurations.
 

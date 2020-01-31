@@ -7,6 +7,16 @@ import {validation} from './middlewares/validation';
 import {getShield} from './services/auth';
 import {renderEmailTemplate} from './email';
 
+process.on('uncaughtException', (err: Error) => {
+    console.error(`Caught exception: ${err}`);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+    console.error(`unhandledRejection Listener: \n 
+        origin at promise: ${promise} \n
+        with reason: ${reason}`);
+});
+
 (async () => {
     const shield = await getShield(prisma);
 
