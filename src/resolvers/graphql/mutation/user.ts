@@ -70,7 +70,10 @@ export async function updateMyUser(parent, {data}, {prisma, user}) {
 export async function approveUserEmail(parent, {token}, {prisma, user}) {
     const { userId } = jwt.verify(token, configs.app?.auth?.secret);
     await prisma.updateUser({where: {id: userId}, data: {emailApproved: true}});
-    user.emailApproved = true;
+
+    if (user) {
+        user.emailApproved = true;
+    }
 
     return {
         success: true,
@@ -78,7 +81,7 @@ export async function approveUserEmail(parent, {token}, {prisma, user}) {
     };
 }
 
-export async function forgetUserEmail(parent, {email}, {prisma}) {
+export async function forgetUserEmail(parent, {email}, {prisma}) {``
     const user: User = await prisma.user({ email });
 
     if (!user) {
