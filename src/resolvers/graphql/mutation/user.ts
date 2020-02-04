@@ -81,7 +81,7 @@ export async function approveUserEmail(parent, {token}, {prisma, user}) {
     };
 }
 
-export async function forgetUserEmail(parent, {email}, {prisma}) {``
+export async function forgetUserEmail(parent, {email}, {prisma}) {
     const user: User = await prisma.user({ email });
 
     if (!user) {
